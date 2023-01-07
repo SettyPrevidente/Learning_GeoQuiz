@@ -16,4 +16,12 @@
     <string name="question_africa">Исток реки Нил расположен в Египте.</string>
     <string name="question_americas">Река Амазонка длиннейшая в Америке.</string>
     <string name="question_asia">Байкал самое глубокое пресноводное озеро в мире.</string>
+
+    <string name="zero">Баллов: 0</string>
+    <string name="one">1 баллов</string>
+    <string name="two">2 баллов</string>
+    <string name="three">3 баллов</string>
+    <string name="four">4 баллов</string>
+    <string name="five">5 баллов</string>
+    <string name="six">0 баллов</string>
 </resources>

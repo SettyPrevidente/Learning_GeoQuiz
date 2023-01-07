@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.view.ViewDebug.IntToString
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var nextButton: ImageButton
     private lateinit var beforeButton: ImageButton
     private lateinit var questionTextView: TextView
+    private lateinit var rightAnswersTextView: TextView
 
     private val questionBank = listOf(
         Question(R.string.question_australia, true),
@@ -31,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     private var currentIndex = 0
+    private var rightAnswers = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +41,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         trueButton = findViewById(R.id.true_button)
         falseButton = findViewById(R.id.false_button)
+
         nextButton = findViewById(R.id.next_button)
         beforeButton = findViewById(R.id.bedore_button)
+        beforeButton.setEnabled(false)
+
         questionTextView = findViewById(R.id.question_text_view)
 
         trueButton.setOnClickListener { view: View ->
@@ -97,17 +103,22 @@ class MainActivity : AppCompatActivity() {
     private fun updateQuestion() {
         val questionTextResId = questionBank[currentIndex].textResId
         questionTextView.setText(questionTextResId)
+        trueButton.setEnabled(true)
+        falseButton.setEnabled(true)
     }
 
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = questionBank[currentIndex].answer
         val messageResId = if (userAnswer == correctAnswer) {R.string.correct_toast}
                             else {R.string.incorrect_toast}
+
         Toast.makeText(
             this,
             messageResId,
             Toast.LENGTH_SHORT)
             .apply { setGravity(Gravity.CENTER, 0, 0); show() }
+        trueButton.setEnabled(false)
+        falseButton.setEnabled(false)
     }
 
 }
